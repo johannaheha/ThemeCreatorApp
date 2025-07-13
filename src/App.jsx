@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// TASK 1
+// Ein einzelnes Theme aus der db.js importieren –> themes[0]
+// Namen des Themes in der Benutzeroberfläche anzeigen
+// Komponente ColorCard erstellen zur Darstellung einer einzelnen Farbe
+// Übergibt an jede ColorCard die Rolle und den Hexwert als Props
+// Nutzt .map(), um alle Farben aus dem Theme dynamisch darzustellen
+// Jede ColorCard zeigt: die Rolle (z.B. "primary"), den Farbwert (z.B. "#57886C"), die Farbe selbst (als Farbfeld über inline-style)
+// Eine separate ColorCard.css erstellen für das Styling der Farbkarte
+// Die Darstellung soll mobil-freundlich sein (iPhone SE – max 375px Breite)
+// Wichtig: Kein hartkodiertes Layout – möglichst flexible Breiten verwenden
+
+import "./App.css";
+import ColorCard from "./ColorCard";
+import { themes } from "./db";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const theme = themes[0];
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header>Theme Creator</header>
+      <h1>{theme.name}</h1>
+      <ul>
+        {theme.colors.map((color) => (
+          <ColorCard key={color.role} role={color.role} value={color.value} />
+        ))}
+      </ul>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,0 +1,33 @@
+.color-card {
+  display: flex;
+  margin: 12px 0;
+  background-color: lightgray;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 80px;
+  width: 100%; /* passt sich dem zentralen Container an */
+}
+
+/* Der linke Teil der Karte mit Textinfos (Rolle + Hexwert) */
+.color-info {
+  flex: 1; /* Nimmt den verbleibenden Platz ein (neben dem Farbbalken) */
+  padding: 10px; /* Innenabstand für etwas „Luft“ um den Text */
+}
+
+/* Rolle des Farbwerts (z. B. "primary") */
+.color-info h2 {
+  font-size: 16px;
+  margin: 0; /* Kein Außenabstand – saubere Ausrichtung */
+}
+
+/* Hexwert der Farbe (z. B. "#57886C") */
+.color-info h3 {
+  font-size: 14px;
+  margin-top: 5px; /* Kleiner Abstand nach oben */
+}
+
+/* Der rechte Farbbalken der Karte */
+.color-swatch {
+  width: 80px; /* Feste Breite – damit der Balken schmal bleibt */
+  border-radius: 0 12px 12px 0; /* Ecken im Uhrzeigersinn: top-left,top-right, bottom-right, bottom-left */
+}
