@@ -16,20 +16,39 @@
 // Übergibt das Theme-Objekt als Prop an Theme.jsx
 // Die Theme-Komponente ist zuständig für Anzeige und Umschaltung (Preview ↔ Detail)
 
-import "./App.css";
-import ColorCard from "./ColorCard";
-import { themes } from "./db";
-import Theme from "./Theme";
+// TASK3
+// Create a React component for the theme form. --> themeForm.jsx
+// Design the form layout with appropriate input fields for title and colors. -->Textfeld+4Farbfelder
+// Use uncontrolled inputs and give the input fields a defaultValue. --> defaultValue kein useState
+// Make the name input required. --> required im input-text-feld!
+// Inside App.js, create a new state called themes --> const [themes, setThemes] = useState(...)
+// and paste the themes from the db.js as the initial value. --> import { themes as initialThemes }
+// Create a function called handleAddTheme with a newTheme parameter which adds it at the top of the theme array state.
+// pass the handleAddTheme function to the theme form component. --> <ThemeForm handleAddTheme={handleAddTheme} />
+// Test the form to ensure it successfully adds themes with titles and colors.
 
-function App() {
+import { useState } from "react";
+import { themes as initialThemes } from "./db";
+import ThemeForm from "./ThemeForm";
+import Theme from "./Theme";
+import "./App.css";
+
+export default function App() {
+  const [themes, setThemes] = useState(initialThemes);
+
+  function handleAddTheme(newTheme) {
+    setThemes([newTheme, ...themes]);
+  }
+
   return (
     <>
       <header>Theme Creator</header>
-      {themes.map((theme) => (
-        <Theme key={theme.id} theme={theme} />
-      ))}
+      <ThemeForm handleAddTheme={handleAddTheme} />
+      <ul>
+        {themes.map((theme) => (
+          <Theme key={theme.id} theme={theme} />
+        ))}
+      </ul>
     </>
   );
 }
-
-export default App;
