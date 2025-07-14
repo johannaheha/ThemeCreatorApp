@@ -1,0 +1,20 @@
+.theme-detail {
+  list-style: none;
+  gap: 8px;
+}
+
+li {
+  list-style: none;
+}
+
+.theme-preview {
+  display: flex;
+  gap: 8px;
+}
+
+.preview-swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
