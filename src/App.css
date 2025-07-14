@@ -40,3 +40,30 @@
 .read-the-docs {
   color: #888;
 }
+
+body {
+  background-color: white; /* App-Hintergrund */
+  margin: 0;
+  font-family: sans-serif;
+}
+
+header {
+  background-color: #d9d9d9; /* Hellgrau */
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px;
+  margin: 24px auto 16px;
+  border-radius: 16px;
+  width: fit-content;
+  max-width: 100%;
+}
+
+/* Theme-Name (z. B. "Vivid Meadow") */
+h1 {
+  font-size: 18px; /* Kleiner als default */
+  margin: 16px 0; /* Etwas Abstand */
+  padding-left: 8px; /* Linksbündig mit Abstand */
+  font-weight: normal; /* Optional: nicht fett */
+}
