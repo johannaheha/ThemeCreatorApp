@@ -9,22 +9,25 @@
 // Die Darstellung soll mobil-freundlich sein (iPhone SE – max 375px Breite)
 // Wichtig: Kein hartkodiertes Layout – möglichst flexible Breiten verwenden
 
+// TASK 2
+// Importiert das gesamte Theme-Array aus db.js
+// Durchläuft mit .map() alle Themes
+// Für jedes Theme wird die Theme-Komponente gerendert
+// Übergibt das Theme-Objekt als Prop an Theme.jsx
+// Die Theme-Komponente ist zuständig für Anzeige und Umschaltung (Preview ↔ Detail)
+
 import "./App.css";
 import ColorCard from "./ColorCard";
 import { themes } from "./db";
+import Theme from "./Theme";
 
 function App() {
-  const theme = themes[0];
-
   return (
     <>
       <header>Theme Creator</header>
-      <h1>{theme.name}</h1>
-      <ul>
-        {theme.colors.map((color) => (
-          <ColorCard key={color.role} role={color.role} value={color.value} />
-        ))}
-      </ul>
+      {themes.map((theme) => (
+        <Theme key={theme.id} theme={theme} />
+      ))}
     </>
   );
 }
