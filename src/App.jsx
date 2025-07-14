@@ -27,6 +27,11 @@
 // pass the handleAddTheme function to the theme form component. --> <ThemeForm handleAddTheme={handleAddTheme} />
 // Test the form to ensure it successfully adds themes with titles and colors.
 
+//Task4
+// Enhance the detail view component to include a delete button.
+// In App.js, create a function handleDeleteTheme and implement the functionality to handle the delete action when the button is clicked.
+// Ensure that deleting a theme updates the theme list appropriately.
+
 import { useState } from "react";
 import { themes as initialThemes } from "./db";
 import ThemeForm from "./ThemeForm";
@@ -40,13 +45,29 @@ export default function App() {
     setThemes([newTheme, ...themes]);
   }
 
+  function handleDeleteTheme(themeToRevomeId) {
+    // console.log(themeId);
+    const filteredThemes = themes.filter((theme) => {
+      if (themeToRevomeId === theme.id) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+    setThemes(filteredThemes);
+  }
+
   return (
     <>
       <header>Theme Creator</header>
       <ThemeForm handleAddTheme={handleAddTheme} />
       <ul>
         {themes.map((theme) => (
-          <Theme key={theme.id} theme={theme} />
+          <Theme
+            key={theme.id}
+            theme={theme}
+            handleOnDelete={handleDeleteTheme}
+          />
         ))}
       </ul>
     </>

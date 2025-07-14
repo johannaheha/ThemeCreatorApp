@@ -22,11 +22,14 @@ import { IconChevronUp, IconChevronDown } from "@tabler/icons-react";
 import { useState } from "react";
 import ColorCard from "./ColorCard";
 
-export default function Theme({ theme }) {
+export default function Theme({ theme, handleOnDelete }) {
   const [isOpen, setIsOpen] = useState();
 
   function onClick() {
     setIsOpen(!isOpen);
+  }
+  function onDelete() {
+    handleOnDelete(theme.id);
   }
 
   return (
@@ -38,6 +41,9 @@ export default function Theme({ theme }) {
             <h2>{theme.name}</h2>
             <IconChevronDown />
           </div>
+          <button type="button" onClick={onDelete}>
+            Delete
+          </button>
           <ul className="theme-detail">
             {theme.colors.map((color) => (
               <ColorCard
