@@ -32,14 +32,28 @@
 // In App.js, create a function handleDeleteTheme and implement the functionality to handle the delete action when the button is clicked.
 // Ensure that deleting a theme updates the theme list appropriately.
 
-import { useState } from "react";
+//Task5
+// ERL - Install use-local-storage-state with npm. 
+// ERL - Integrate the use-local-storage-state hook to manage theme state persistence.
+// ERL - Inside the ColorCard component, create a local state for the color name.
+// ERL - in const - Use the useEffect hook to fetch the color name from the color api and update the color name state.
+// ERL - Enhance the color card component to display the color name fetched from the API.
+// Test the persistence of theme state across app sessions.
+// Test the fetching and display of color names to ensure accuracy.
+
+
 import { themes as initialThemes } from "./db";
 import ThemeForm from "./ThemeForm";
 import Theme from "./Theme";
 import "./App.css";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function App() {
-  const [themes, setThemes] = useState(initialThemes);
+  const [themes, setThemes] = useLocalStorageState("themes", {
+    defaultValue: initialThemes,
+  });
+
+
 
   function handleAddTheme(newTheme) {
     setThemes([newTheme, ...themes]);

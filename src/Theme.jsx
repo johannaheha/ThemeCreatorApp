@@ -50,6 +50,7 @@ export default function Theme({ theme, handleOnDelete }) {
                 key={color.role}
                 role={color.role}
                 value={color.value}
+                name={color.name}
               />
             ))}
           </ul>
