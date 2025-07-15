@@ -17,14 +17,14 @@
 // Die Theme-Komponente ist zuständig für Anzeige und Umschaltung (Preview ↔ Detail)
 
 // TASK3
-// Create a React component for the theme form. --> themeForm.jsx
+// Create a React component for the theme form. --> AddthemeForm.jsx
 // Design the form layout with appropriate input fields for title and colors. -->Textfeld+4Farbfelder
 // Use uncontrolled inputs and give the input fields a defaultValue. --> defaultValue kein useState
 // Make the name input required. --> required im input-text-feld!
 // Inside App.js, create a new state called themes --> const [themes, setThemes] = useState(...)
 // and paste the themes from the db.js as the initial value. --> import { themes as initialThemes }
 // Create a function called handleAddTheme with a newTheme parameter which adds it at the top of the theme array state.
-// pass the handleAddTheme function to the theme form component. --> <ThemeForm handleAddTheme={handleAddTheme} />
+// pass the handleAddTheme function to the theme form component. --> <AddThemeForm handleAddTheme={handleAddTheme} />
 // Test the form to ensure it successfully adds themes with titles and colors.
 
 //Task4
@@ -49,7 +49,7 @@
 // Test the edit functionality thoroughly to ensure accurate updating of theme details.
 
 import { themes as initialThemes } from "./db";
-import ThemeForm from "./ThemeForm";
+import AddThemeForm from "./AddThemeForm";
 import Theme from "./Theme";
 import "./App.css";
 import useLocalStorageState from "use-local-storage-state";
@@ -80,7 +80,6 @@ export default function App() {
   //EDIT
 
   function handleEditTheme(themeToEditId, newName, newColors) {
-   
     // console.log("hallo");
     const editedThemes = themes.map((theme) => {
       if (themeToEditId === theme.id) {
@@ -99,7 +98,7 @@ export default function App() {
   return (
     <>
       <header>Theme Creator</header>
-      <ThemeForm handleAddTheme={handleAddTheme} />
+      <AddThemeForm handleAddTheme={handleAddTheme} />
       <ul>
         {themes.map((theme) => (
           <Theme

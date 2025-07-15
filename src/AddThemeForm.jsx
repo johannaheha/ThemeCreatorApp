@@ -1,17 +1,17 @@
 // TASK3
-// Create a React component for the theme form. --> themeForm.jsx
+// Create a React component for the theme form. --> AddThemeForm.jsx
 // Design the form layout with appropriate input fields for title and colors. -->Textfeld+4Farbfelder
 // Use uncontrolled inputs and give the input fields a defaultValue. --> defaultValue kein useState
 // Make the name input required. --> required im input-text-feld!
 // Inside App.js, create a new state called themes --> const [themes, setThemes] = useState(...)
 // and paste the themes from the db.js as the initial value. --> import { themes as initialThemes }
 // Create a function called handleAddTheme with a newTheme parameter which adds it at the top of the theme array state.
-// pass the handleAddTheme function to the theme form component. --> <ThemeForm handleAddTheme={handleAddTheme} />
+// pass the handleAddTheme function to the theme form component. --> <AddThemeForm handleAddTheme={handleAddTheme} />
 // Test the form to ensure it successfully adds themes with titles and colors.
 
 import fetchClosestColorNames from "./FetchClosestColorNames.js";
 
-export default function ThemeForm({ handleAddTheme }) {
+export default function AddThemeForm({ handleAddTheme }) {
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
