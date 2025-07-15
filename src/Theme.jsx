@@ -21,28 +21,47 @@ import "./Theme.css";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons-react";
 import { useState } from "react";
 import ColorCard from "./ColorCard";
+import EditForm from "./EditForm";
 
-export default function Theme({ theme, handleOnDelete }) {
-  const [isOpen, setIsOpen] = useState();
+export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
+  const [viewState, setViewState] = useState("preview");
+  //preview, detail, edit
 
-  function onClick() {
-    setIsOpen(!isOpen);
+  function onToggle() {
+    if (viewState === "preview") {
+      setViewState("detail");
+    } else if (viewState === "detail") {
+      setViewState("preview");
+    } else if (viewState === "edit") {
+      setViewState("preview");
+    }
   }
   function onDelete() {
     handleOnDelete(theme.id);
   }
 
+  function onEdit() {
+    setViewState("edit");
+  }
+
+  function onSubmit(newName, newColors) {
+    handleOnEdit(theme.id, newName, newColors);
+    setViewState("preview");
+  }
+
   return (
     <li className="theme-card">
-      {isOpen ? (
-        // Detailansicht
+      {viewState === "detail" && ( // Detailansicht
         <>
-          <div className="theme-header" onClick={onClick}>
+          <div className="theme-header" onClick={onToggle}>
             <h2>{theme.name}</h2>
             <IconChevronDown />
           </div>
           <button type="button" onClick={onDelete}>
             Delete
+          </button>
+          <button type="button" onClick={onEdit}>
+            Edit
           </button>
           <ul className="theme-detail">
             {theme.colors.map((color) => (
@@ -55,10 +74,12 @@ export default function Theme({ theme, handleOnDelete }) {
             ))}
           </ul>
         </>
-      ) : (
+      )}
+
+      {viewState === "preview" && (
         // Vorschauansicht
         <>
-          <div className="theme-header" onClick={onClick}>
+          <div className="theme-header" onClick={onToggle}>
             <h2>{theme.name}</h2>
             <IconChevronUp />
           </div>
@@ -71,6 +92,25 @@ export default function Theme({ theme, handleOnDelete }) {
               ></li>
             ))}
           </ul>
+        </>
+      )}
+
+      {viewState === "edit" && (
+        //Bearbeitungsansicht
+        <>
+          <div className="theme-header" onClick={onToggle}>
+            <h2>{theme.name}</h2>
+            <h3>Edit Theme</h3>
+            <IconChevronUp />
+          </div>
+          <EditForm
+            handleEditTheme={onSubmit}
+            themeName={theme.name}
+            primaryColor={theme.colors[0].value}
+            secondaryColor={theme.colors[1].value}
+            surfaceColor={theme.colors[2].value}
+            surfaceOnColor={theme.colors[3].value}
+          />
         </>
       )}
     </li>

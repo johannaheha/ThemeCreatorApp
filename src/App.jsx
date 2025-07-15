@@ -33,7 +33,7 @@
 // Ensure that deleting a theme updates the theme list appropriately.
 
 //Task5
-// ERL - Install use-local-storage-state with npm. 
+// ERL - Install use-local-storage-state with npm.
 // ERL - Integrate the use-local-storage-state hook to manage theme state persistence.
 // ERL - Inside the ColorCard component, create a local state for the color name.
 // ERL - in const - Use the useEffect hook to fetch the color name from the color api and update the color name state.
@@ -41,6 +41,12 @@
 // Test the persistence of theme state across app sessions.
 // Test the fetching and display of color names to ensure accuracy.
 
+// Task6
+// ERL - Implement an edit button in the theme detail view.
+// ERL - Create an edit form component {handleEditTheme} to allow users to modify theme details.
+// ERL - Implement functionality to toggle {onToggle} the visibility of the edit form upon clicking the edit button.
+// In App.js, integrate the edit functionality in a new function handleEditTheme.
+// Test the edit functionality thoroughly to ensure accurate updating of theme details.
 
 import { themes as initialThemes } from "./db";
 import ThemeForm from "./ThemeForm";
@@ -53,12 +59,12 @@ export default function App() {
     defaultValue: initialThemes,
   });
 
-
-
+  //ADD
   function handleAddTheme(newTheme) {
     setThemes([newTheme, ...themes]);
   }
 
+  //DELETE
   function handleDeleteTheme(themeToRevomeId) {
     // console.log(themeId);
     const filteredThemes = themes.filter((theme) => {
@@ -71,6 +77,25 @@ export default function App() {
     setThemes(filteredThemes);
   }
 
+  //EDIT
+
+  function handleEditTheme(themeToEditId, newName, newColors) {
+   
+    // console.log("hallo");
+    const editedThemes = themes.map((theme) => {
+      if (themeToEditId === theme.id) {
+        return {
+          id: theme.id,
+          name: newName,
+          colors: newColors,
+        };
+      } else {
+        return theme;
+      }
+    });
+    setThemes(editedThemes);
+  }
+
   return (
     <>
       <header>Theme Creator</header>
@@ -81,6 +106,7 @@ export default function App() {
             key={theme.id}
             theme={theme}
             handleOnDelete={handleDeleteTheme}
+            handleOnEdit={handleEditTheme}
           />
         ))}
       </ul>
