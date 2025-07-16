@@ -67,3 +67,9 @@ h1 {
   padding-left: 8px; /* Linksbündig mit Abstand */
   font-weight: normal; /* Optional: nicht fett */
 }
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+

@@ -1,12 +1,14 @@
 import fetchClosestColorNames from "./FetchClosestColorNames.js";
+import "./Form.css";
 
-export default function EditForm({
-  themeName,
-  handleEditTheme,
-  primaryColor,
-  secondaryColor,
-  surfaceColor,
-  surfaceOnColor,
+export default function Form({
+  onSubmit,
+  themeName = "",
+  primaryColor = "#ff0000",
+  secondaryColor = "#00ff00",
+  surfaceColor = "#0000ff",
+  surfaceOnColor = "#000000",
+  isEdit = true,
 }) {
   async function handleSubmit(event) {
     event.preventDefault();
@@ -17,8 +19,8 @@ export default function EditForm({
     const surfaceName = await fetchClosestColorNames(form.surface.value);
     const surfaceOnName = await fetchClosestColorNames(form.surfaceOn.value);
 
-    const newName = form.title.value;
-    const newColors = [
+    const name = form.title.value;
+    const colors = [
       { role: "primary", name: primaryName, value: form.primary.value },
       { role: "secondary", name: secondaryName, value: form.secondary.value },
       { role: "surface", name: surfaceName, value: form.surface.value },
@@ -28,12 +30,13 @@ export default function EditForm({
         value: form.surfaceOn.value,
       },
     ];
-
-    handleEditTheme(newName, newColors);
+    const newTheme = { name, colors };
+    onSubmit(newTheme);
     form.reset();
   }
   return (
-    <form className="edit-theme-form" onSubmit={handleSubmit}>
+    <form className="theme-form" onSubmit={handleSubmit}>
+      <h3>{isEdit? "Edit Theme" : "Create a Theme"}</h3>
       <input
         className="theme-title-input"
         name="title"
@@ -47,7 +50,9 @@ export default function EditForm({
         <input name="surface" type="color" defaultValue={surfaceColor} />
         <input name="surfaceOn" type="color" defaultValue={surfaceOnColor} />
       </div>
-      <button type="submit">Save Theme</button>
+      <button className="submit-button" type="submit">
+        {isEdit ? "Save Theme" : "Add Theme"}
+      </button>
     </form>
   );
 }

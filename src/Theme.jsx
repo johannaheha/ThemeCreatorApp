@@ -1,27 +1,8 @@
-// TASK 2
-// Create separate React components for preview and detail view of themes.
-// Create a React component called Theme.
-// Inside the Theme component, implement a toggle functionality between preview and detail view for themes.
-// Iterate over the list of given color themes and create a Theme component for each.
-// Ensure that toggling between views updates the display accordingly.
-// Test toggling functionality with different themes to ensure it works as expected.
-// * * * * * * * * * * * * * * * * * * *
-// Themes importieren
-// Erwartet ein Theme-Objekt als Prop, z.B. { name: "Athena", colors: [...] }
-// useState -> Lokaler State, um zwischen Vorschau- und Detailansicht umzuschalten
-// Klick-Handler, der beim Klicken auf den Kopfbereich die Ansicht toggelt
-// Wenn isOpen false ist: Nur Theme-Name + kleine Farbkästchen anzeigen
-// Wenn isOpen true ist: Theme-Name + große ColorCards anzeigen
-// Wenn geöffnet: Pfeil nach oben
-// Wenn geschlossen: Pfeil nach unten
-// Theme.css, weil alle Styles für Theme-Komponente ausgelagert werden sollen
-// WICHTIG: Diese Komponente wird mehrfach von App.jsx gerendert – für jedes Theme im Array.
-
 import "./Theme.css";
 import { IconChevronUp, IconChevronDown } from "@tabler/icons-react";
 import { useState } from "react";
 import ColorCard from "./ColorCard";
-import EditForm from "./EditForm";
+import Form from "./Form";
 
 export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
   const [viewState, setViewState] = useState("preview");
@@ -44,8 +25,8 @@ export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
     setViewState("edit");
   }
 
-  function onSubmit(newName, newColors) {
-    handleOnEdit(theme.id, newName, newColors);
+  function onSubmit(newTheme) {
+    handleOnEdit(theme.id, newTheme);
     setViewState("preview");
   }
 
@@ -60,12 +41,14 @@ export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
               onClick={onToggle}
             />
           </div>
+          <div className="buttons">
           <button className="delete-button" type="button" onClick={onDelete}>
             Delete
           </button>
           <button type="button" onClick={onEdit}>
             Edit
           </button>
+          </div>
           <ul className="theme-detail">
             {theme.colors.map((color) => (
               <ColorCard
@@ -112,9 +95,8 @@ export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
               onClick={onToggle}
             />
           </div>
-          <h3>Edit Theme</h3>
-          <EditForm
-            handleEditTheme={onSubmit}
+          <Form
+            onSubmit={onSubmit}
             themeName={theme.name}
             primaryColor={theme.colors[0].value}
             secondaryColor={theme.colors[1].value}
