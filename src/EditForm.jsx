@@ -33,12 +33,20 @@ export default function EditForm({
     form.reset();
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="title" type="text" defaultValue={themeName} required />
-      <input name="primary" type="color" defaultValue={primaryColor} />
-      <input name="secondary" type="color" defaultValue={secondaryColor} />
-      <input name="surface" type="color" defaultValue={surfaceColor} />
-      <input name="surfaceOn" type="color" defaultValue={surfaceOnColor} />
+    <form className="edit-theme-form" onSubmit={handleSubmit}>
+      <input
+        className="theme-title-input"
+        name="title"
+        type="text"
+        defaultValue={themeName}
+        required
+      />
+      <div className="color-fields">
+        <input name="primary" type="color" defaultValue={primaryColor} />
+        <input name="secondary" type="color" defaultValue={secondaryColor} />
+        <input name="surface" type="color" defaultValue={surfaceColor} />
+        <input name="surfaceOn" type="color" defaultValue={surfaceOnColor} />
+      </div>
       <button type="submit">Save Theme</button>
     </form>
   );

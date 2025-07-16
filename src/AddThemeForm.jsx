@@ -10,6 +10,7 @@
 // Test the form to ensure it successfully adds themes with titles and colors.
 
 import fetchClosestColorNames from "./FetchClosestColorNames.js";
+import "./AddThemeForm.css";
 
 export default function AddThemeForm({ handleAddTheme }) {
   async function handleSubmit(event) {
@@ -41,11 +42,14 @@ export default function AddThemeForm({ handleAddTheme }) {
   }
   return (
     <form onSubmit={handleSubmit}>
-      <input name="title" type="text" defaultValue="" required />
-      <input name="primary" type="color" defaultValue="#ff0000" />
-      <input name="secondary" type="color" defaultValue="#00ff00" />
-      <input name="surface" type="color" defaultValue="#0000ff" />
-      <input name="surfaceOn" type="color" defaultValue="#000000" />
+      <h3 className="form-title">Create a Theme</h3>
+        <input name="title" type="text" defaultValue="" required />
+      <div className="color-fields">
+        <input name="primary" type="color" defaultValue="#ff0000" />
+        <input name="secondary" type="color" defaultValue="#00ff00" />
+        <input name="surface" type="color" defaultValue="#0000ff" />
+        <input name="surfaceOn" type="color" defaultValue="#000000" />
+      </div>
       <button type="submit">Add Theme</button>
     </form>
   );
