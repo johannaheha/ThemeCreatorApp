@@ -53,11 +53,14 @@ export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
     <li className="theme-card">
       {viewState === "detail" && ( // Detailansicht
         <>
-          <div className="theme-header" onClick={onToggle}>
+          <div className="theme-header">
             <h2>{theme.name}</h2>
-            <IconChevronDown />
+            <IconChevronDown
+              className="theme-header-chevron"
+              onClick={onToggle}
+            />
           </div>
-          <button type="button" onClick={onDelete}>
+          <button className="delete-button" type="button" onClick={onDelete}>
             Delete
           </button>
           <button type="button" onClick={onEdit}>
@@ -79,9 +82,12 @@ export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
       {viewState === "preview" && (
         // Vorschauansicht
         <>
-          <div className="theme-header" onClick={onToggle}>
+          <div className="theme-header">
             <h2>{theme.name}</h2>
-            <IconChevronUp />
+            <IconChevronUp
+              className="theme-header-chevron"
+              onClick={onToggle}
+            />
           </div>
           <ul className="theme-preview">
             {theme.colors.map((color) => (
@@ -98,11 +104,15 @@ export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
       {viewState === "edit" && (
         //Bearbeitungsansicht
         <>
-          <div className="theme-header" onClick={onToggle}>
+          <div className="theme-header">
             <h2>{theme.name}</h2>
-            <h3>Edit Theme</h3>
-            <IconChevronUp />
+
+            <IconChevronUp
+              className="theme-header-chevron"
+              onClick={onToggle}
+            />
           </div>
+          <h3>Edit Theme</h3>
           <EditForm
             handleEditTheme={onSubmit}
             themeName={theme.name}

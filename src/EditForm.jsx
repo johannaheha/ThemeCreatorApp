@@ -1,3 +1,5 @@
+import fetchClosestColorNames from "./FetchClosestColorNames.js";
+
 export default function EditForm({
   themeName,
   handleEditTheme,
@@ -10,22 +12,6 @@ export default function EditForm({
     event.preventDefault();
     const form = event.target;
 
-    async function fetchClosestColorNames(hex) {
-      const url = `https://www.thecolorapi.com/id?hex=${hex.substring(1)}`;
-      console.log(hex);
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          return null;
-        }
-        const json = await response.json();
-        console.log(json);
-        return json.name.value;
-      } catch (error) {
-        console.error(error.message);
-        return null;
-      }
-    }
     const primaryName = await fetchClosestColorNames(form.primary.value);
     const secondaryName = await fetchClosestColorNames(form.secondary.value);
     const surfaceName = await fetchClosestColorNames(form.surface.value);
@@ -47,12 +33,20 @@ export default function EditForm({
     form.reset();
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="title" type="text" defaultValue={themeName} required />
-      <input name="primary" type="color" defaultValue={primaryColor} />
-      <input name="secondary" type="color" defaultValue={secondaryColor} />
-      <input name="surface" type="color" defaultValue={surfaceColor} />
-      <input name="surfaceOn" type="color" defaultValue={surfaceOnColor} />
+    <form className="edit-theme-form" onSubmit={handleSubmit}>
+      <input
+        className="theme-title-input"
+        name="title"
+        type="text"
+        defaultValue={themeName}
+        required
+      />
+      <div className="color-fields">
+        <input name="primary" type="color" defaultValue={primaryColor} />
+        <input name="secondary" type="color" defaultValue={secondaryColor} />
+        <input name="surface" type="color" defaultValue={surfaceColor} />
+        <input name="surfaceOn" type="color" defaultValue={surfaceOnColor} />
+      </div>
       <button type="submit">Save Theme</button>
     </form>
   );
