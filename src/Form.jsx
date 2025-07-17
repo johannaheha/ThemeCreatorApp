@@ -13,7 +13,6 @@ export default function Form({
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
-
     const primaryName = await fetchClosestColorNames(form.primary.value);
     const secondaryName = await fetchClosestColorNames(form.secondary.value);
     const surfaceName = await fetchClosestColorNames(form.surface.value);

@@ -1,5 +1,3 @@
-
-
 import { themes as initialThemes } from "./db";
 import Theme from "./Theme";
 import "./App.css";
@@ -18,17 +16,14 @@ export default function App() {
   }
 
   //DELETE
-  function handleDeleteTheme(idToRemove) {
- 
-    const filteredThemes = themes.filter(
-      (theme) => idToRemove !== theme.id
-    );
+  function handleDelete(idToRemove) {
+    const filteredThemes = themes.filter((theme) => idToRemove !== theme.id);
     setThemes(filteredThemes);
   }
 
   //EDIT
 
-  function handleEditTheme(idToEdit, editTheme) {
+  function handleEdit(idToEdit, editTheme) {
     const editedThemes = themes.map((theme) => {
       if (idToEdit === theme.id) {
         return {
@@ -51,8 +46,8 @@ export default function App() {
           <Theme
             key={theme.id}
             theme={theme}
-            handleOnDelete={handleDeleteTheme}
-            handleOnEdit={handleEditTheme}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
           />
         ))}
       </ul>
