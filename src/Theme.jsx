@@ -4,11 +4,11 @@ import { useState } from "react";
 import ColorCard from "./ColorCard";
 import Form from "./Form";
 
-export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
+export default function Theme({ theme, onDelete, onEdit }) {
   const [viewState, setViewState] = useState("preview");
   //preview, detail, edit
 
-  function onToggle() {
+  function handleToggle() {
     if (viewState === "preview") {
       setViewState("detail");
     } else if (viewState === "detail") {
@@ -17,16 +17,16 @@ export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
       setViewState("preview");
     }
   }
-  function onDelete() {
-    handleOnDelete(theme.id);
+  function handleDelete() {
+    onDelete(theme.id);
   }
 
-  function onEdit() {
+  function handleEdit() {
     setViewState("edit");
   }
 
-  function onThemeSubmit(newTheme) {
-    handleOnEdit(theme.id, newTheme);
+  function handleSubmit(newTheme) {
+    onEdit(theme.id, newTheme);
     setViewState("preview");
   }
 
@@ -38,14 +38,18 @@ export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
             <h2>{theme.name}</h2>
             <IconChevronDown
               className="theme-header-chevron"
-              onClick={onToggle}
+              onClick={handleToggle}
             />
           </div>
           <div className="buttons">
-            <button className="delete-button" type="button" onClick={onDelete}>
+            <button
+              className="delete-button"
+              type="button"
+              onClick={handleDelete}
+            >
               Delete
             </button>
-            <button type="button" onClick={onEdit}>
+            <button type="button" onClick={handleEdit}>
               Edit
             </button>
           </div>
@@ -69,7 +73,7 @@ export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
             <h2>{theme.name}</h2>
             <IconChevronUp
               className="theme-header-chevron"
-              onClick={onToggle}
+              onClick={handleToggle}
             />
           </div>
           <ul className="theme-preview">
@@ -90,11 +94,11 @@ export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
           <div className="theme-header">
             <h2>{theme.name}</h2>
 
-            <IconX className="theme-header-chevron" onClick={onToggle} />
+            <IconX className="theme-header-chevron" onClick={handleToggle} />
           </div>
           <Form
             isEdit={true}
-            onThemeSubmit={onThemeSubmit}
+            onSubmit={handleSubmit}
             themeName={theme.name}
             primaryColor={theme.colors[0].value}
             secondaryColor={theme.colors[1].value}

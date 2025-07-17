@@ -16,14 +16,14 @@ export default function App() {
   }
 
   //DELETE
-  function handleOnDelete(idToRemove) {
+  function handleDelete(idToRemove) {
     const filteredThemes = themes.filter((theme) => idToRemove !== theme.id);
     setThemes(filteredThemes);
   }
 
   //EDIT
 
-  function handleOnEdit(idToEdit, editTheme) {
+  function handleEdit(idToEdit, editTheme) {
     const editedThemes = themes.map((theme) => {
       if (idToEdit === theme.id) {
         return {
@@ -40,14 +40,14 @@ export default function App() {
   return (
     <>
       <header>Theme Creator</header>
-      <Form onThemeSubmit={handleAddTheme} isEdit={false} />
+      <Form onSubmit={handleAddTheme} isEdit={false} />
       <ul>
         {themes.map((theme) => (
           <Theme
             key={theme.id}
             theme={theme}
-            handleOnDelete={handleOnDelete}
-            handleOnEdit={handleOnEdit}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
           />
         ))}
       </ul>

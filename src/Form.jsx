@@ -2,7 +2,7 @@ import fetchClosestColorNames from "./FetchClosestColorNames.js";
 import "./Form.css";
 
 export default function Form({
-  onThemeSubmit,
+  onSubmit,
   themeName = "",
   primaryColor = "#ff0000",
   secondaryColor = "#00ff00",
@@ -30,7 +30,7 @@ export default function Form({
       },
     ];
     const newTheme = { name, colors };
-    onThemeSubmit(newTheme);
+    onSubmit(newTheme);
     form.reset();
   }
   return (
