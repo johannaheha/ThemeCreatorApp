@@ -1,5 +1,3 @@
-
-
 import { themes as initialThemes } from "./db";
 import Theme from "./Theme";
 import "./App.css";
@@ -18,17 +16,14 @@ export default function App() {
   }
 
   //DELETE
-  function handleDeleteTheme(idToRemove) {
- 
-    const filteredThemes = themes.filter(
-      (theme) => idToRemove !== theme.id
-    );
+  function handleOnDelete(idToRemove) {
+    const filteredThemes = themes.filter((theme) => idToRemove !== theme.id);
     setThemes(filteredThemes);
   }
 
   //EDIT
 
-  function handleEditTheme(idToEdit, editTheme) {
+  function handleOnEdit(idToEdit, editTheme) {
     const editedThemes = themes.map((theme) => {
       if (idToEdit === theme.id) {
         return {
@@ -45,14 +40,14 @@ export default function App() {
   return (
     <>
       <header>Theme Creator</header>
-      <Form onSubmit={handleAddTheme} isEdit={false} />
+      <Form onThemeSubmit={handleAddTheme} isEdit={false} />
       <ul>
         {themes.map((theme) => (
           <Theme
             key={theme.id}
             theme={theme}
-            handleOnDelete={handleDeleteTheme}
-            handleOnEdit={handleEditTheme}
+            handleOnDelete={handleOnDelete}
+            handleOnEdit={handleOnEdit}
           />
         ))}
       </ul>

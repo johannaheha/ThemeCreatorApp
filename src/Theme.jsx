@@ -1,5 +1,5 @@
 import "./Theme.css";
-import { IconChevronUp, IconChevronDown } from "@tabler/icons-react";
+import { IconChevronUp, IconChevronDown, IconX } from "@tabler/icons-react";
 import { useState } from "react";
 import ColorCard from "./ColorCard";
 import Form from "./Form";
@@ -25,7 +25,7 @@ export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
     setViewState("edit");
   }
 
-  function onSubmit(newTheme) {
+  function onThemeSubmit(newTheme) {
     handleOnEdit(theme.id, newTheme);
     setViewState("preview");
   }
@@ -42,12 +42,12 @@ export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
             />
           </div>
           <div className="buttons">
-          <button className="delete-button" type="button" onClick={onDelete}>
-            Delete
-          </button>
-          <button type="button" onClick={onEdit}>
-            Edit
-          </button>
+            <button className="delete-button" type="button" onClick={onDelete}>
+              Delete
+            </button>
+            <button type="button" onClick={onEdit}>
+              Edit
+            </button>
           </div>
           <ul className="theme-detail">
             {theme.colors.map((color) => (
@@ -90,13 +90,11 @@ export default function Theme({ theme, handleOnDelete, handleOnEdit }) {
           <div className="theme-header">
             <h2>{theme.name}</h2>
 
-            <IconChevronUp
-              className="theme-header-chevron"
-              onClick={onToggle}
-            />
+            <IconX className="theme-header-chevron" onClick={onToggle} />
           </div>
           <Form
-            onSubmit={onSubmit}
+            isEdit={true}
+            onThemeSubmit={onThemeSubmit}
             themeName={theme.name}
             primaryColor={theme.colors[0].value}
             secondaryColor={theme.colors[1].value}

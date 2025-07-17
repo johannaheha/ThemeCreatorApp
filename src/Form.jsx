@@ -2,7 +2,7 @@ import fetchClosestColorNames from "./FetchClosestColorNames.js";
 import "./Form.css";
 
 export default function Form({
-  onSubmit,
+  onThemeSubmit,
   themeName = "",
   primaryColor = "#ff0000",
   secondaryColor = "#00ff00",
@@ -13,7 +13,6 @@ export default function Form({
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
-
     const primaryName = await fetchClosestColorNames(form.primary.value);
     const secondaryName = await fetchClosestColorNames(form.secondary.value);
     const surfaceName = await fetchClosestColorNames(form.surface.value);
@@ -31,7 +30,7 @@ export default function Form({
       },
     ];
     const newTheme = { name, colors };
-    onSubmit(newTheme);
+    onThemeSubmit(newTheme);
     form.reset();
   }
   return (
